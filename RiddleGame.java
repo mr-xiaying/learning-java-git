@@ -28,7 +28,9 @@ public class RiddleGame {
         int numRiddles = riddles.length;
 
         while (true) {
+           //这里我使用了一个Math.random（）,用来生成0.0到1.0的double类型的随机数，并且进行了一个强制类型转换，舍去了当中的小数部位
             int randomIndex = (int) (Math.random() * numRiddles);
+            
             String selectedRiddle = riddles[randomIndex];
             String correctAnswer = answers[randomIndex];
             String hint = hints[randomIndex];
@@ -38,13 +40,14 @@ public class RiddleGame {
 
             // Get user's answer.
             String userAnswer = scanner.nextLine();
-
+            //这里是比较字符串是否相同，本次是忽略了大小写的模式，equals（）是不忽略大小写的模式
             if (userAnswer.equalsIgnoreCase(correctAnswer)) {
                 System.out.println("Correct!");
                 score++;
             } else {
                 // If the answer is incorrect, offer a hint.
                 System.out.println("Wrong! Would you like a hint? (yes/no)");
+                //这一段是把字符读入后转化为小写的字母的格式，有助于提高代码的健壮性
                 String giveHint = scanner.nextLine().toLowerCase();
                 if (giveHint.equals("yes")) {
                     System.out.println(hint);
